@@ -5,6 +5,10 @@ import math
 
 
 
+def pre_format(train, test, classes): 
+    
+
+
 def get_norm_dist(x, u, a):  # gets the norm distribution for the passed in data
     part_one = 0.0  # broken into 2 parts just to make it more readable and easier
     part_two = 0.0  # 2nd part
@@ -18,15 +22,13 @@ def get_norm_dist(x, u, a):  # gets the norm distribution for the passed in data
 
 # just a paste in from my program for now, will update for stuff later. So ignore for now
 # ignore for now, just has stuff in it from my prog 2. Just pasted in code
-def get_standard(input_array):  # gets the standard distribution for the data passed in
-    mean = np.zeros((1, 58))  # mean
-    std = np.zeros((1, 58))  # standard dev
-    mean_not = np.zeros((1, 58))  # same as above but for the not spam class
-    std_not = np.zeros((1, 58))
-    type_of = 0  # spam or not spam checker
+# updating it rn, will take some time
+def get_standard(input_array, classes):  # gets the standard distribution for the data passed in
+    mean = np.zeros((int(classes), 81))  # mean, make it mean for each class by all variables
+    std = np.zeros((int(classes), 81))  # standard dev
+    type_of = 0  # check what class type it is
     hold = 0.0  # for doing squares, just like it to be self * self.
     for j in range(0, len(input_array)):  # for all rows/data in input calculate
-        # mean += input_array[j][0]
         type_of = int(input_array[j][57])
         if type_of == 1:  # check what class
             for h in range(0, 58):
@@ -83,5 +85,5 @@ if __name__ == "__main__":  # main function call
     print("testData")
     print(test[1])
     print("trainData")
-    print(train[1][80])
+    print(train[1])
     print("testing")
