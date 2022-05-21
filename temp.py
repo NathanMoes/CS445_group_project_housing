@@ -16,7 +16,11 @@ def get_norm_dist(x, u, a):  # gets the norm distribution for the passed in data
     return result
 
 
+<<<<<<< HEAD
 # just a paste in from my program for now, will update for stuff later. So ignore for now
+=======
+# ignore for now, just has stuff in it from my prog 2. Just pasted in code
+>>>>>>> 30514460315f22717d09bb86925c35d88760fcd7
 def get_standard(input_array):  # gets the standard distribution for the data passed in
     mean = np.zeros((1, 58))  # mean
     std = np.zeros((1, 58))  # standard dev
