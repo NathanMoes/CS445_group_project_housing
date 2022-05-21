@@ -64,8 +64,23 @@ if __name__ == "__main__":  # main function call
         csv_reader = csv.reader(csvfile, delimiter=',')
         for row in csv_reader:
             train.append(row)
+    sum_var = 0.0
+    maxim = 0.0
+    minim = 100000000.0
+    temp = 0.0
+    for row in range(1, len(train)):
+        temp = float(train[row][80])
+        sum_var += temp
+        if temp < minim:
+            minim = temp
+        if temp > maxim:
+            maxim = temp
+    sum_var /= len(train)
+    print("AVERAGE = " + str(sum_var))
+    print("MAX = " + str(maxim))
+    print("MIM = " + str(minim))
     print("testData")
     print(test[1])
     print("trainData")
-    print(train[1])
+    print(train[1][80])
     print("testing")
