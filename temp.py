@@ -37,6 +37,12 @@ def get_prob(train_v, input_v, class_type, feature_type):
     count = 0
     count_in_class = 0
     number_of = 729
+    if feature_type == 0:
+        for rows_in in range(1, number_of):
+            if get_class(train_v[rows_in][80]) == class_type:
+                count += 1
+        probability = float(count/number_of)
+        return probability
     if feature_type == (3 or 4 or 27 or 35 or 37 or 38 or 39 or 44 or 47 or 45 or 46 or 63 or 67 or 72 or 68 or 69
                         or 70 or 71 or 76 or 77):
         for mean_calc in range(1, 729):
