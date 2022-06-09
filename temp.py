@@ -182,6 +182,25 @@ if __name__ == "__main__":  # main function call
                 # print("INCORRECT")
                 conf_mat[get_class(train[iteration + half_point][80])][5] += 1
             # prob[0] += math.log(get_prob(train, test[iteration], 0, feature))
+    
+    zero = 0
+    one = 0
+    two = 0
+    three = 0
+    four = 0
+    five = 0
+    for calc in range(0, 6):
+        zero += conf_mat[0][calc]
+        one += conf_mat[1][calc]
+        two += conf_mat[2][calc]
+        three += conf_mat[3][calc]
+        four += conf_mat[4][calc]
+        five += conf_mat[5][calc]
+    sum_num = 0.0
+    for calc in range(one):
+        sum_num += median_one[calc] - 2
+    # means_square_error_rooted = 
+    
     print("Correct % is: " + str(correct_count / 729))
     print(conf_mat)
     print(median_zero)
