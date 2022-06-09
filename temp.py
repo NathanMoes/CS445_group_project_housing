@@ -2,6 +2,9 @@ import csv
 import numpy as np
 import math
 import statistics
+import matplotlib.pyplot as plt
+import seaborn as sn
+import pandas as pd
 
 
 def get_class(to_check):
@@ -190,11 +193,18 @@ if __name__ == "__main__":  # main function call
     four = 0
     five = 0
     # zero_med = statistics.median(median_one)
+    """
     one_med = statistics.median(median_one)
     two_med = statistics.median(median_two)
     three_med = statistics.median(median_three)
     four_med = statistics.median(median_four)
     five_med = statistics.median(median_five)
+    """
+    one_med = 25000.0
+    two_med = 75000.0
+    three_med = 125000.0
+    four_med = 175000.0
+    five_med = 225000.0
     for calc in range(0, 6):
         zero += conf_mat[calc][0]
         one += conf_mat[calc][1]
@@ -204,36 +214,37 @@ if __name__ == "__main__":  # main function call
         five += conf_mat[calc][5]
     sum_num = 0.0
     for calc in range(0, int(one)):
-        store = median_one[calc] - one_med
+        # store = median_one[calc] - one_med
+        store = np.log(median_one[calc]) - np.log(one_med)
         sum_num += (store * store)
     sum_num /= one
     print("RMSE of one class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(two)):
-        store = median_two[calc] - two_med
+        store = np.log(median_two[calc]) - np.log(two_med)
         sum_num += (store * store)
     sum_num /= two
     print("RMSE of two class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(three)):
-        store = median_three[calc] - three_med
+        store = np.log(median_three[calc]) - np.log(three_med)
         sum_num += (store * store)
     sum_num /= three
     print("RMSE of three class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(four)):
-        store = median_four[calc] - four_med
+        store = np.log(median_four[calc]) - np.log(four_med)
         sum_num += (store * store)
     sum_num /= four
     print("RMSE of three class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(five)):
-        store = median_five[calc] - five_med
+        store = np.log(median_five[calc]) - np.log(five_med)
         sum_num += (store * store)
     sum_num /= five
     print("RMSE of three class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
-    # means_square_error_rooted = 
+    # means_square_error_rooted =
 
     print("Correct % is: " + str(correct_count / 729))
     print(conf_mat)
@@ -244,3 +255,7 @@ if __name__ == "__main__":  # main function call
     print("Medians 3: " + str(statistics.median(median_three)))
     print("Medians 4: " + str(statistics.median(median_four)))
     print("Medians 5: " + str(statistics.median(median_five)))
+    df_cm = pd.DataFrame(conf_mat, range(6), range(6))
+    sn.set(font_scale = 1.4)
+    sn.heatmap(df_cm, annot=True, annot_kws={"size":30})
+    plt.show()
