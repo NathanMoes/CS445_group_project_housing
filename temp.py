@@ -1,6 +1,7 @@
 import csv
 import numpy as np
 import math
+import statistics
 
 
 def get_class(to_check):
@@ -90,6 +91,12 @@ if __name__ == "__main__":  # main function call
             if train[row][feature] == 'NA':
                 train[row][feature] = 0
     # for iteration in range(0, len(test)):
+    median_zero = []
+    median_one = []
+    median_two = []
+    median_three = []
+    median_four = []
+    median_five = []
     for iteration in range(1, half_point):
         maximum = -100000000.0
         max_index = 0
@@ -105,9 +112,11 @@ if __name__ == "__main__":  # main function call
             if prob[check] > maximum:
                 maximum = prob[check]
                 max_index = check
-        # print("computed gen: " + str(iteration))
+        print("computed gen: " + str(iteration))
         if max_index == 0:
             # print("predicted sale price is less than 50k")
+            result = float(train[iteration + half_point][80])
+            median_zero.append(result)
             if get_class(train[iteration+half_point][80]) == 0:
                 # print("CORRECT")
                 correct_count += 1
@@ -116,7 +125,9 @@ if __name__ == "__main__":  # main function call
                 conf_mat[get_class(train[iteration+half_point][80])][0] += 1
                 # print("INCORRECT")
         if max_index == 1:
+            result = float(train[iteration + half_point][80])
             # print("predicted sale price is between 50k and 100k")
+            median_one.append(result)
             if get_class(train[iteration+half_point][80]) == 1:
                 # print("CORRECT")
                 correct_count += 1
@@ -125,6 +136,8 @@ if __name__ == "__main__":  # main function call
                 # print("INCORRECT")
                 conf_mat[get_class(train[iteration + half_point][80])][1] += 1
         if max_index == 2:
+            result = float(train[iteration + half_point][80])
+            median_two.append(result)
             # print("predicted sale price is between 100k and 150k")
             if get_class(train[iteration+half_point][80]) == 2:
                 # print("CORRECT")
@@ -134,6 +147,8 @@ if __name__ == "__main__":  # main function call
                 # print("INCORRECT")
                 conf_mat[get_class(train[iteration + half_point][80])][2] += 1
         if max_index == 3:
+            result = float(train[iteration + half_point][80])
+            median_three.append(result)
             # print("predicted sale price is between 150k and 200k")
             if get_class(train[iteration+half_point][80]) == 3:
                 # print("CORRECT")
@@ -143,6 +158,8 @@ if __name__ == "__main__":  # main function call
                 # print("INCORRECT")
                 conf_mat[get_class(train[iteration + half_point][80])][3] += 1
         if max_index == 4:
+            result = float(train[iteration + half_point][80])
+            median_four.append(result)
             # print("predicted sale price is between 200k and 250k")
             if get_class(train[iteration+half_point][80]) == 4:
                 # print("CORRECT")
@@ -152,6 +169,10 @@ if __name__ == "__main__":  # main function call
                 # print("INCORRECT")
                 conf_mat[get_class(train[iteration + half_point][80])][4] += 1
         if max_index == 5:
+            result = float(train[iteration + half_point][80])
+            # print(result)
+            median_five.append(result)
+            # print("Medians 5: " + str(statistics.median(median_five)))
             # print("predicted sale price is 250k+")
             if get_class(train[iteration+half_point][80]) == 5:
                 # print("CORRECT")
@@ -161,5 +182,12 @@ if __name__ == "__main__":  # main function call
                 # print("INCORRECT")
                 conf_mat[get_class(train[iteration + half_point][80])][5] += 1
             # prob[0] += math.log(get_prob(train, test[iteration], 0, feature))
-    print("Correct % is: " + str(correct_count/729))
+    print("Correct % is: " + str(correct_count / 729))
     print(conf_mat)
+    print(median_zero)
+    # print("Medians 0: " + str(statistics.median(median_zero)))
+    print("Medians 1: " + str(statistics.median(median_one)))
+    print("Medians 2: " + str(statistics.median(median_two)))
+    print("Medians 3: " + str(statistics.median(median_three)))
+    print("Medians 4: " + str(statistics.median(median_four)))
+    print("Medians 5: " + str(statistics.median(median_five)))
