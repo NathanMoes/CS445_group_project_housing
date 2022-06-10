@@ -236,13 +236,13 @@ if __name__ == "__main__":  # main function call
         store = np.log(median_four[calc]) - np.log(four_med)
         sum_num += (store * store)
     sum_num /= four
-    print("RMSE of three class: " + str(np.sqrt(sum_num)))
+    print("RMSE of four class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(five)):
         store = np.log(median_five[calc]) - np.log(five_med)
         sum_num += (store * store)
     sum_num /= five
-    print("RMSE of three class: " + str(np.sqrt(sum_num)))
+    print("RMSE of five class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     # means_square_error_rooted =
 
