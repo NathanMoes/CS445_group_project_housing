@@ -192,6 +192,7 @@ if __name__ == "__main__":  # main function call
     three = 0
     four = 0
     five = 0
+    percent = 0.0
     # zero_med = statistics.median(median_one)
     """
     one_med = statistics.median(median_one)
@@ -216,30 +217,35 @@ if __name__ == "__main__":  # main function call
     for calc in range(0, int(one)):
         # store = median_one[calc] - one_med
         store = np.log(median_one[calc]) - np.log(one_med)
+        percent += store
         sum_num += (store * store)
     sum_num /= one
     print("RMSE of one class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(two)):
         store = np.log(median_two[calc]) - np.log(two_med)
+        percent += store
         sum_num += (store * store)
     sum_num /= two
     print("RMSE of two class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(three)):
         store = np.log(median_three[calc]) - np.log(three_med)
+        percent += store
         sum_num += (store * store)
     sum_num /= three
     print("RMSE of three class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(four)):
         store = np.log(median_four[calc]) - np.log(four_med)
+        percent += store
         sum_num += (store * store)
     sum_num /= four
     print("RMSE of four class: " + str(np.sqrt(sum_num)))
     sum_num = 0.0
     for calc in range(0, int(five)):
         store = np.log(median_five[calc]) - np.log(five_med)
+        percent += store
         sum_num += (store * store)
     sum_num /= five
     print("RMSE of five class: " + str(np.sqrt(sum_num)))
@@ -249,6 +255,7 @@ if __name__ == "__main__":  # main function call
     print("Correct % is: " + str(correct_count / 729))
     print(conf_mat)
     print(median_zero)
+    print("percent error is: " +str(percent/729))
     # print("Medians 0: " + str(statistics.median(median_zero)))
     print("Medians 1: " + str(statistics.median(median_one)))
     print("Medians 2: " + str(statistics.median(median_two)))
