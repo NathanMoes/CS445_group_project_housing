@@ -100,11 +100,15 @@ if __name__ == "__main__":  # main function call
     median_three = []
     median_four = []
     median_five = []
+    predicted = []
+    actual = []
+    index = []
     for iteration in range(1, half_point):
+        index.append(iteration)
         maximum = -100000000.0
         max_index = 0
         prob = np.zeros((6, 1))
-        for feature in range(0, 80):
+        for feature in range(0, 10):
             prob[0] += math.log(get_prob(train, train[iteration + half_point], 0, feature))
             prob[1] += math.log(get_prob(train, train[iteration + half_point], 1, feature))
             prob[2] += math.log(get_prob(train, train[iteration + half_point], 2, feature))
@@ -120,6 +124,8 @@ if __name__ == "__main__":  # main function call
             # print("predicted sale price is less than 50k")
             result = float(train[iteration + half_point][80])
             median_zero.append(result)
+            predicted.append(0)
+            actual.append(result)
             if get_class(train[iteration + half_point][80]) == 0:
                 # print("CORRECT")
                 correct_count += 1
@@ -131,6 +137,8 @@ if __name__ == "__main__":  # main function call
             result = float(train[iteration + half_point][80])
             # print("predicted sale price is between 50k and 100k")
             median_one.append(result)
+            predicted.append(25000)
+            actual.append(result)
             if get_class(train[iteration + half_point][80]) == 1:
                 # print("CORRECT")
                 correct_count += 1
@@ -141,6 +149,8 @@ if __name__ == "__main__":  # main function call
         if max_index == 2:
             result = float(train[iteration + half_point][80])
             median_two.append(result)
+            predicted.append(75000)
+            actual.append(result)
             # print("predicted sale price is between 100k and 150k")
             if get_class(train[iteration + half_point][80]) == 2:
                 # print("CORRECT")
@@ -152,6 +162,8 @@ if __name__ == "__main__":  # main function call
         if max_index == 3:
             result = float(train[iteration + half_point][80])
             median_three.append(result)
+            predicted.append(125000)
+            actual.append(result)
             # print("predicted sale price is between 150k and 200k")
             if get_class(train[iteration + half_point][80]) == 3:
                 # print("CORRECT")
@@ -163,6 +175,8 @@ if __name__ == "__main__":  # main function call
         if max_index == 4:
             result = float(train[iteration + half_point][80])
             median_four.append(result)
+            predicted.append(175000)
+            actual.append(result)
             # print("predicted sale price is between 200k and 250k")
             if get_class(train[iteration + half_point][80]) == 4:
                 # print("CORRECT")
@@ -175,6 +189,8 @@ if __name__ == "__main__":  # main function call
             result = float(train[iteration + half_point][80])
             # print(result)
             median_five.append(result)
+            predicted.append(225000)
+            actual.append(result)
             # print("Medians 5: " + str(statistics.median(median_five)))
             # print("predicted sale price is 250k+")
             if get_class(train[iteration + half_point][80]) == 5:
@@ -265,4 +281,13 @@ if __name__ == "__main__":  # main function call
     df_cm = pd.DataFrame(conf_mat, range(6), range(6))
     sn.set(font_scale = 1.4)
     sn.heatmap(df_cm, annot=True, annot_kws={"size":30})
+    plt.show()
+    print(predicted)
+    print(actual)
+    plt.plot(index, predicted, label="Predicted")
+    plt.plot(index, actual, label="Actual")
+    plt.xlabel('Index')
+    plt.ylabel('Price')
+    plt.title('Actual vs Predicted Prices')
+    plt.legend()
     plt.show()
